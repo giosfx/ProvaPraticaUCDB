@@ -1,0 +1,38 @@
+﻿@model Prova.App.ViewModels.PedidoViewModel
+
+@{
+    ViewData["Title"] = "Excluir " + Model.NomeProduto;
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Você tem certeza disso?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NomeProduto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NomeProduto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Valor.ToString("C");
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataVencimento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataVencimento)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Excluir" class="btn btn-danger" />
+        <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+    </form>
+</div>
