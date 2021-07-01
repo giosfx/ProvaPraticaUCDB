@@ -138,6 +138,8 @@ namespace Prova.App.Controllers
         {
             var pedidoAtual = _mapper.Map<PedidoViewModel>(await _pedidoRepository.ObterPorId(id));
 
+            if (pedido.Valor < 0) return null;
+
             pedidoAtual.Valor -= pedido.Valor;
 
             return pedidoAtual;
