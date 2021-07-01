@@ -9,7 +9,7 @@ namespace Prova.App.Extensions
         {
             int diferencaDiasAtualValidade = (dataValidade - DateTime.Today).Days;
 
-            if (diferencaDiasAtualValidade > 0 && diferencaDiasAtualValidade < 4) return "background-color:orange";
+            if (diferencaDiasAtualValidade > 0 && diferencaDiasAtualValidade <= 3) return "background-color:orange";
 
             if (diferencaDiasAtualValidade > 3) return "background-color:green";
 
@@ -24,7 +24,7 @@ namespace Prova.App.Extensions
 
         public static string DisplayDesconto(this RazorPage page, DateTime dataValidade)
         {
-            return (dataValidade - DateTime.Today).Days < 3 ? "none" : "";
+            return dataValidade <= DateTime.Today ? "none" : "";
         }
     }
 }

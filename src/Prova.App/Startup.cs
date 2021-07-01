@@ -26,7 +26,8 @@ namespace Prova.App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ProvaContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             services.AddScoped<ProvaContext>();
@@ -55,8 +56,8 @@ namespace Prova.App
             var localizationOptions = new RequestLocalizationOptions
             {
                 DefaultRequestCulture = new RequestCulture(defaultCulture),
-                SupportedCultures = new List<CultureInfo> {defaultCulture},
-                SupportedUICultures = new List<CultureInfo> {defaultCulture}
+                SupportedCultures = new List<CultureInfo> { defaultCulture },
+                SupportedUICultures = new List<CultureInfo> { defaultCulture }
             };
 
             app.UseRequestLocalization(localizationOptions);

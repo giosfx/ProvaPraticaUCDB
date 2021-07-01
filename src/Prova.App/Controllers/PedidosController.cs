@@ -81,6 +81,33 @@ namespace Prova.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Desconto(Guid id)
+        {
+            var pedidoViewModel = _mapper.Map<PedidoViewModel>(await _pedidoRepository.ObterPorId(id));
+
+            if (pedidoViewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(pedidoViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Desconto(Guid id, PedidoViewModel pedidoViewModel)
+        {
+            if (id != pedidoViewModel.Id) return NotFound();
+
+            if (!ModelState.IsValid) return View(pedidoViewModel);
+
+            var pedido = _mapper.Map<Pedido>(await AplicarDesconto(id, pedidoViewModel));
+            
+            await _pedidoRepository.Atualizar(pedido);
+
+            return RedirectToAction(nameof(Index));
+        }
+
         public async Task<IActionResult> Delete(Guid id)
         {
 
@@ -105,6 +132,15 @@ namespace Prova.App.Controllers
             await _pedidoRepository.Remover(id);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<PedidoViewModel> AplicarDesconto(Guid id, PedidoViewModel pedido)
+        {
+            var pedidoAtual = _mapper.Map<PedidoViewModel>(await _pedidoRepository.ObterPorId(id));
+
+            pedidoAtual.Valor -= pedido.Valor;
+
+            return pedidoAtual;
         }
 
     }

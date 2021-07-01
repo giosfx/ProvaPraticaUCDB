@@ -43,7 +43,12 @@
             </td>
 
             <td class="text-right">
-                <a class="btn btn-success" style="display: @this.DisplayDesconto(item.DataVencimento)" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-dollar-sign"></span></a>
+                <a class="btn btn-success" 
+                   style="display: @this.DisplayDesconto(item.DataVencimento)" 
+                   asp-action="Desconto" 
+                   asp-route-id="@item.Id">
+                    <span class="fa fa-dollar-sign"></span>
+                </a>
                 <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-search"></span></a>
                 <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil-alt"></span></a>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
