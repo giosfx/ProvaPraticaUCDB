@@ -16,6 +16,7 @@ namespace Prova.App.ViewModels
         public decimal Valor { get; set; }
         [DisplayName("Data de Vencimento")]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataVencimento { get; set; }
     }
 }
