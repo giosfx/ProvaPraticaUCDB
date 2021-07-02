@@ -7,9 +7,10 @@ namespace Prova.App.Extensions
     {
         public static string CorValidade(this RazorPage page, DateTime dataValidade)
         {
-            int diferencaDiasAtualValidade = (dataValidade - DateTime.Today).Days;
 
-            if (diferencaDiasAtualValidade > 0 && diferencaDiasAtualValidade <= 3) return "background-color:orange";
+            int diferencaDiasAtualValidade = dataValidade.Date.Subtract(DateTime.Today.Date).Days;
+
+            if (diferencaDiasAtualValidade >= 0 && diferencaDiasAtualValidade <= 3) return "background-color:orange";
 
             if (diferencaDiasAtualValidade > 3) return "background-color:green";
 
@@ -24,7 +25,7 @@ namespace Prova.App.Extensions
 
         public static string DisplayDesconto(this RazorPage page, DateTime dataValidade)
         {
-            return dataValidade <= DateTime.Today ? "none" : "";
+            return dataValidade.Date < DateTime.Today.Date ? "none" : "";
         }
     }
 }
